@@ -67,6 +67,19 @@ class Netreviews_Avisverifies_Helper_API{
     }
     // Diffirent column structure according to diffirent query.
     protected function column($column){
+
+        $customername = "";
+        // Si le nom de famille n'est pas vide
+        if (!empty($column[8][0])) {
+            $customername .= ucfirst($column[8][0]).". ";
+        } 
+        // Si le prenom n'est pas vide
+        if (!empty($column[9])) {
+            $customername .= ucfirst($column[9]);
+        } 
+
+
+
         return array(
             'query' => $column[0],
             'id_product_av' => $column[2],
@@ -74,8 +87,9 @@ class Netreviews_Avisverifies_Helper_API{
             'rate' => $column[7],
             'review' => urlencode(($column[6])),
             'horodate' => $column[5],
-            'customer_name' => urlencode((ucfirst($column[8][0]).". " .ucfirst($column[9]))),
+            'customer_name' => urlencode($customername)
             );
+        
     }
     
     protected function discussion($column){

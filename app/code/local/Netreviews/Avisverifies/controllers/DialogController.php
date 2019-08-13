@@ -249,17 +249,20 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
     }
 
     protected function truncateTables($DATA,$API){ 
-        $reponse['return'] = 1;
-        $reponse['debug']  = "Tables vidées";
-        $reponse['message'] = "Tables vidées";
-        
         $resource = Mage::getSingleton('core/resource');
         $write = $resource->getConnection('core_write');
         $write->delete($resource->getTableName('avisverifies/reviews'));
         $write->delete($resource->getTableName('avisverifies/average'));
-
-        $reponse['query'] = $this->getRequest()->getPost('query'); // get request post
+		
+		Mage::helper('avisverifies/Install')->addUpdateFields();
+		
         Mage::app()->cleanCache();
+		
+		$reponse['return'] = 1;
+        $reponse['debug']  = "Tables vidées and Primary Key fixed";
+        $reponse['message'] = "Tables vidées and Primary Key fixed";
+        $reponse['query'] = $this->getRequest()->getPost('query'); // get request post
+        
         return $reponse;
     }
 

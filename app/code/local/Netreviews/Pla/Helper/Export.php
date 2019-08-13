@@ -207,7 +207,7 @@ class Netreviews_Pla_Helper_Export extends Netreviews_Avisverifies_Helper_Export
 					if ($attribute['name'] == 'brand') {
 						$_val = $full_product->getData($attribute['static_value']);
 						
-						// If selectbox $_val is number so get rather Text.
+						// If selectbox $_val is number so rather get Text.
 						if ( is_numeric( $_val ) ) {
 							$_val = $full_product -> getAttributeText( $attribute['static_value'] );
 						}
@@ -217,7 +217,7 @@ class Netreviews_Pla_Helper_Export extends Netreviews_Avisverifies_Helper_Export
 					if ($attribute['name'] == 'category') {
 						$_val = $full_product->getData($attribute['static_value']);
 						
-						// If selectbox $_val is number so get rather Text.
+						// If selectbox $_val is number so rather get Text.
 						if ( is_numeric( $_val ) ) {
 							$_val = $full_product -> getAttributeText( $attribute['static_value'] );
 						}
