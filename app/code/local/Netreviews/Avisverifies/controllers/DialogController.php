@@ -2,7 +2,9 @@
 class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Front_Action
 {
     
-    public function indexAction() { 
+	protected $plaModuleCompatibale = 1;
+
+	public function indexAction() { 
         
         /**************************************
          * GET PARENT IDS FROM CHILD ID:      *
@@ -372,12 +374,37 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
                         }
                         // if the product exist then do nothing
                         if (!$this->productExistInArray($tmp[$id],$order['product_id'])) {
-                            $tmp[$id]['products'][] = array(
+                            // CODE UPDATED 
+							$foo = array(
                                 'id_product' => $order['product_id'],
                                 'name_product' => $order['product_name'],
                                 'url' => $order['url'],
                                 'url_image' => $order['url_image'],
                             );
+							for($i=1;$i<11;$i++){
+								$name = 'info'.$i;
+								// product_mpn
+								if (!empty($order[$name])) {
+									$foo[$name] = $order[$name];
+								}
+							}
+							if (!empty($order['gtin'])) {
+								$foo['GTIN_UPC'] = $order['gtin'];
+							}
+							if (!empty($order['brand'])) {
+								$foo['brand_name'] = $order['brand'];
+							}
+							if (!empty($order['sku'])) {
+								$foo['sku'] = $order['sku'];
+							}
+							if (!empty($order['mpn'])) {
+								$foo['MPN'] = $order['mpn'];
+							}
+							if (!empty($order['category'])) {
+								$foo['category'] = $order['category'];
+							}
+							// CODE UPDATED END HERE
+                            $tmp[$id]['products'][] = $foo;
                         }
                     $ordersIds[] = $id;
             }
@@ -416,11 +443,11 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
     
     protected function productExistInArray($array,$id) {
         // first test if product array exist
-        if (empty($tmp[$id]['products'])) {
+        if (empty($array['products'])) {
             return false;
         }    
         // else
-        foreach ($array as $prod) {
+        foreach ($array['products'] as $prod) {
             if ($prod['id_product'] == $id) {
                 return true;
             }
@@ -673,36 +700,5 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
                 ->addFieldToFilter('scope_id',$store->getData('store_id'))
                 ->addFieldToFilter('path','avisverifies/system/idwebsite')->getFirstItem();
 		return $storeConfig->getData('value');
-	}
-	
-	public function parentChildRelationship($productId) {
-		// first test if id is pk or sku
-		// check if is_numeric
-		if(is_numeric($productId)){
-			$product = Mage::getModel('catalog/product')->load($productId);	
-			if (!$product->getId()) {
-				$product = Mage::getModel('catalog/product')->loadByAttribute('sku', 'stylobleu01');
-				if (!$product->getId()) {
-					return array();
-				}
-			}
-		}
-		else {
-			$product = Mage::getModel('catalog/product')->loadByAttribute('sku', 'stylobleu01');
-			if (!$product->getId()) {
-				$product = Mage::getModel('catalog/product')->load($productId);
-				if (!$product->getId()) {
-					return array();
-				}
-			}
-		}
-		// ok now we have the product
-		$returnedIds[] = $product->getId();
-		// we check if product is parent.
-		$childIds = Mage::getModel('catalog/product_type_configurable')->getChildrenIds($product->getId());
-		// now merge the ids 
-		foreach($childIds as $_ids){
-			$returnedIds[] = $_ids;
-		}
 	}
 }

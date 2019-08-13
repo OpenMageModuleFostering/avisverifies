@@ -53,7 +53,7 @@
 						->setTemplate('avisverifies/pagination.phtml')
                         ->toHtml();  ?>
                 </div>
-                <button onclick="window.avisVerifies.Ajax()" id="av_load_next_page" data-page="1" data-page-last="<?php echo $maxPages ?>">
+                <button type="button" onclick="window.avisVerifies.Ajax()" id="av_load_next_page" data-page="1" data-page-last="<?php echo $maxPages ?>">
 					<?php echo $this->__('More Reviews...')?>
 				</button>
 				<img id="avisVarifiesAjaxImage" src="<?php echo $this->getSkinUrl('images/avisverifies/pagination-loader.gif')?>" style="display:none;margin: 10px 0px 0px 10px;" />

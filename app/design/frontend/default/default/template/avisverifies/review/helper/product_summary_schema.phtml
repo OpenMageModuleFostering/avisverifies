@@ -16,7 +16,7 @@
             <meta itemprop="description" content="<?php echo strip_tags($_product->getDescription()); ?>">
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                 <meta itemprop="priceCurrency" content="<?php echo  Mage::app()->getStore()->getCurrentCurrencyCode(); ?>">
-                <meta itemprop="price" content="<?php echo $price; ?>">
+                <meta itemprop="price" content="<?php echo str_replace( "," , ".", $price ); ?>">
             </div>
 			<?php if(!Mage::getStoreConfig('avisverifies/extra/product_light_widget')): ?>
 				<div id="av_product_award" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
