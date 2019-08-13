@@ -20,5 +20,5 @@ class Netreviews_Avisverifies_IndexController extends Mage_Core_Controller_Front
             echo $html;
         }
     }
-	
+    
 }

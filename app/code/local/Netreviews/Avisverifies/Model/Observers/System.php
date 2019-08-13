@@ -29,7 +29,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
         $enabledwebsite = (isset($POST['groups']['system']['fields']['enabledwebsite']['value']))? $POST['groups']['system']['fields']['enabledwebsite']['value'] : NULL ;
         $forceParentIds = (isset($POST['groups']['extra']['fields']['force_product_parent_id']['value']))? $POST['groups']['extra']['fields']['force_product_parent_id']['value'] : NULL ;
         $addReviewToProductPage = (isset($POST['groups']['extra']['fields']['add_review_to_product_page']['value']))? $POST['groups']['extra']['fields']['add_review_to_product_page']['value'] : NULL ;
-        //$useProductSKU = (isset($POST['groups']['extra']['fields']['use_product_sku']['value']))? $POST['groups']['extra']['fields']['use_product_sku']['value'] : NULL ;
+        $useProductSKU = (isset($POST['groups']['extra']['fields']['use_product_sku']['value']))? $POST['groups']['extra']['fields']['use_product_sku']['value'] : NULL ;
         $productLightWidget = (isset($POST['groups']['extra']['fields']['product_light_widget']['value']))? $POST['groups']['extra']['fields']['product_light_widget']['value'] : NULL ;
         $hasjQuery = (isset($POST['groups']['extra']['fields']['has_jquery']['value']))? $POST['groups']['extra']['fields']['has_jquery']['value'] : NULL ;
         $useProductUrl = (isset($POST['groups']['extra']['fields']['use_product_url']['value']))? $POST['groups']['extra']['fields']['use_product_url']['value'] : NULL ;
@@ -44,7 +44,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
                 $mageselc->saveConfig('avisverifies/system/enabledwebsite',$enabledwebsite,'websites',$website->getId());
                 $mageselc->saveConfig('avisverifies/extra/force_product_parent_id',$forceParentIds,'websites',$website->getId());
                 $mageselc->saveConfig('avisverifies/extra/add_review_to_product_page',$addReviewToProductPage,'websites',$website->getId());
-                //$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'websites',$website->getId());
+                $mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'websites',$website->getId());
                 $mageselc->saveConfig('avisverifies/extra/product_light_widget',$productLightWidget,'websites',$website->getId());
                 $mageselc->saveConfig('avisverifies/extra/has_jquery',$hasjQuery,'websites',$website->getId());
                 $mageselc->saveConfig('avisverifies/extra/use_product_url',$useProductUrl,'websites',$website->getId());
@@ -57,7 +57,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
                 $mageselc->saveConfig('avisverifies/system/enabledwebsite',$enabledwebsite,'stores',$store->getId());
                 $mageselc->saveConfig('avisverifies/extra/force_product_parent_id',$forceParentIds,'stores',$store->getId());
                 $mageselc->saveConfig('avisverifies/extra/add_review_to_product_page',$addReviewToProductPage,'stores',$store->getId());
-                //$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$store->getId());
+                $mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$store->getId());
                 $mageselc->saveConfig('avisverifies/extra/product_light_widget',$productLightWidget,'stores',$store->getId());
                 $mageselc->saveConfig('avisverifies/extra/has_jquery',$hasjQuery,'stores',$store->getId());
                 $mageselc->saveConfig('avisverifies/extra/use_product_url',$useProductUrl,'stores',$store->getId());
@@ -72,7 +72,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
 			$mageselc->saveConfig('avisverifies/system/enabledwebsite',$enabledwebsite,'websites',$websiteId);
 			$mageselc->saveConfig('avisverifies/extra/force_product_parent_id',$forceParentIds,'websites',$websiteId);
 			$mageselc->saveConfig('avisverifies/extra/add_review_to_product_page',$addReviewToProductPage,'websites',$websiteId);
-			//$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'websites',$websiteId);
+			$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'websites',$websiteId);
 			$mageselc->saveConfig('avisverifies/extra/product_light_widget',$productLightWidget,'websites',$websiteId);
 			$mageselc->saveConfig('avisverifies/extra/has_jquery',$hasjQuery,'websites',$websiteId);
 			$mageselc->saveConfig('avisverifies/extra/use_product_url',$useProductUrl,'websites',$websiteId);
@@ -87,7 +87,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
 					$mageselc->saveConfig('avisverifies/system/enabledwebsite',$enabledwebsite,'stores',$storeId);
 					$mageselc->saveConfig('avisverifies/extra/force_product_parent_id',$forceParentIds,'stores',$storeId);
 					$mageselc->saveConfig('avisverifies/extra/add_review_to_product_page',$addReviewToProductPage,'stores',$storeId);
-					//$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$storeId);
+					$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$storeId);
 					$mageselc->saveConfig('avisverifies/extra/product_light_widget',$productLightWidget,'stores',$storeId);
 					$mageselc->saveConfig('avisverifies/extra/has_jquery',$hasjQuery,'stores',$storeId);
 					$mageselc->saveConfig('avisverifies/extra/use_product_url',$useProductUrl,'stores',$storeId);
@@ -102,7 +102,7 @@ class Netreviews_Avisverifies_Model_Observers_System {
 			$mageselc->saveConfig('avisverifies/system/enabledwebsite',$enabledwebsite,'stores',$storeId);
 			$mageselc->saveConfig('avisverifies/extra/force_product_parent_id',$forceParentIds,'stores',$storeId);
 			$mageselc->saveConfig('avisverifies/extra/add_review_to_product_page',$addReviewToProductPage,'stores',$storeId);
-			//$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$storeId);
+			$mageselc->saveConfig('avisverifies/extra/use_product_sku',$useProductSKU,'stores',$storeId);
 			$mageselc->saveConfig('avisverifies/extra/product_light_widget',$productLightWidget,'stores',$storeId);
 			$mageselc->saveConfig('avisverifies/extra/has_jquery',$hasjQuery,'stores',$storeId);
 			$mageselc->saveConfig('avisverifies/extra/use_product_url',$useProductUrl,'stores',$storeId);

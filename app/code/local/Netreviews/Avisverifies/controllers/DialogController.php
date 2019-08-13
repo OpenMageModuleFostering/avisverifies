@@ -2,9 +2,7 @@
 class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Front_Action
 {
     
-	protected $plaModuleCompatibale = 1;
-
-	public function indexAction() { 
+    public function indexAction() { 
         
         /**************************************
          * GET PARENT IDS FROM CHILD ID:      *
@@ -249,20 +247,17 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
     }
 
     protected function truncateTables($DATA,$API){ 
+        $reponse['return'] = 1;
+        $reponse['debug']  = "Tables vidées";
+        $reponse['message'] = "Tables vidées";
+        
         $resource = Mage::getSingleton('core/resource');
         $write = $resource->getConnection('core_write');
         $write->delete($resource->getTableName('avisverifies/reviews'));
         $write->delete($resource->getTableName('avisverifies/average'));
-		
-		Mage::helper('avisverifies/Install')->addUpdateFields();
-		
-        Mage::app()->cleanCache();
-		
-		$reponse['return'] = 1;
-        $reponse['debug']  = "Tables vidées and Primary Key fixed";
-        $reponse['message'] = "Tables vidées and Primary Key fixed";
+
         $reponse['query'] = $this->getRequest()->getPost('query'); // get request post
-        
+        Mage::app()->cleanCache();
         return $reponse;
     }
 
@@ -377,37 +372,12 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
                         }
                         // if the product exist then do nothing
                         if (!$this->productExistInArray($tmp[$id],$order['product_id'])) {
-                            // CODE UPDATED 
-							$foo = array(
+                            $tmp[$id]['products'][] = array(
                                 'id_product' => $order['product_id'],
                                 'name_product' => $order['product_name'],
                                 'url' => $order['url'],
                                 'url_image' => $order['url_image'],
                             );
-							for($i=1;$i<11;$i++){
-								$name = 'info'.$i;
-								// product_mpn
-								if (!empty($order[$name])) {
-									$foo[$name] = $order[$name];
-								}
-							}
-							if (!empty($order['gtin'])) {
-								$foo['GTIN_UPC'] = $order['gtin'];
-							}
-							if (!empty($order['brand'])) {
-								$foo['brand_name'] = $order['brand'];
-							}
-							if (!empty($order['sku'])) {
-								$foo['sku'] = $order['sku'];
-							}
-							if (!empty($order['mpn'])) {
-								$foo['MPN'] = $order['mpn'];
-							}
-							if (!empty($order['category'])) {
-								$foo['category'] = $order['category'];
-							}
-							// CODE UPDATED END HERE
-                            $tmp[$id]['products'][] = $foo;
                         }
                     $ordersIds[] = $id;
             }
@@ -446,11 +416,11 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
     
     protected function productExistInArray($array,$id) {
         // first test if product array exist
-        if (empty($array['products'])) {
+        if (empty($tmp[$id]['products'])) {
             return false;
         }    
         // else
-        foreach ($array['products'] as $prod) {
+        foreach ($array as $prod) {
             if ($prod['id_product'] == $id) {
                 return true;
             }
@@ -486,7 +456,7 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
 				// skip
 				continue;
 			}
-			elseif ($data['query'] == "NEW" || $data['query'] == "UPDATE") {
+			elseif ($data['query'] == "NEW") {
 				// now we check for the parent - child relationship
 				$productListIds = $DATA->parentChildRelationship($data['ref_product']);
 				
@@ -703,5 +673,36 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
                 ->addFieldToFilter('scope_id',$store->getData('store_id'))
                 ->addFieldToFilter('path','avisverifies/system/idwebsite')->getFirstItem();
 		return $storeConfig->getData('value');
+	}
+	
+	public function parentChildRelationship($productId) {
+		// first test if id is pk or sku
+		// check if is_numeric
+		if(is_numeric($productId)){
+			$product = Mage::getModel('catalog/product')->load($productId);	
+			if (!$product->getId()) {
+				$product = Mage::getModel('catalog/product')->loadByAttribute('sku', 'stylobleu01');
+				if (!$product->getId()) {
+					return array();
+				}
+			}
+		}
+		else {
+			$product = Mage::getModel('catalog/product')->loadByAttribute('sku', 'stylobleu01');
+			if (!$product->getId()) {
+				$product = Mage::getModel('catalog/product')->load($productId);
+				if (!$product->getId()) {
+					return array();
+				}
+			}
+		}
+		// ok now we have the product
+		$returnedIds[] = $product->getId();
+		// we check if product is parent.
+		$childIds = Mage::getModel('catalog/product_type_configurable')->getChildrenIds($product->getId());
+		// now merge the ids 
+		foreach($childIds as $_ids){
+			$returnedIds[] = $_ids;
+		}
 	}
 }
