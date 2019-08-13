@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package>
     <name>AvisVerifies</name>
-    <version>2.6.16</version>
+    <version>2.6.17</version>
     <stability>stable</stability>
     <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSLv3.0</license>
     <channel>community</channel>
     <extends/>
     <summary>Avis Verifies vous permet de recolter l'avis des clients sur votre site ecommerce.</summary>
     <description>Avis Verifies vous permet de recolter l'avis de vos clients suite &#xE0; leur achat sur votre boutique ecommerce. Essayez gratuitement notre solution sur www.avis-verifies.com et commencez maintenant &#xE0; r&#xE9;colter les avis de vos clients.</description>
-    <notes>La version 2.6.16 est stable.</notes>
+    <notes>La version 2.6.17 est stable.</notes>
     <authors><author><name>Johnny</name><user>Mikhael</user><email>johnny@avis-verifies.com</email></author><author><name>R&#xE9;mi</name><user>Gravelle</user><email>remi@avis-verifies.com</email></author></authors>
     <date>2016-08-03</date>
     <time>12:07:10</time>

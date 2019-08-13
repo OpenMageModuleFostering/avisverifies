@@ -13,7 +13,7 @@ class Netreviews_Avisverifies_Model_Reviews extends Mage_Core_Model_Abstract{
         $string = Mage::getStoreConfig('avisverifies/extra/relatedstoreslist');
         $string = (empty($string))? '' : $string;
         $this->idWebsite = explode(';', $string);
-        $this->limit = 50;
+        $this->limit = 5;
         $this->page = 1;
     }
 				
