@@ -93,7 +93,8 @@ class Netreviews_Pla_Adminhtml_NetreviewsplaController extends Mage_Adminhtml_Co
 		$website = Mage::app()->getRequest()->getParam('website');
 		
 		if (empty($storeCode)) {
-			Mage::getSingleton('core/session')->addError('Please select a store view');
+			$message = $this -> __('Please select a store view');
+			Mage::getSingleton('core/session') -> addError( $message );
 			$this->_redirect('*/*/pla');
 			return;
 		}
@@ -107,7 +108,8 @@ class Netreviews_Pla_Adminhtml_NetreviewsplaController extends Mage_Adminhtml_Co
 		$test = $this->getDataField($post,'id');
 		// id is set to sku , then update the store config sku
 		if (empty($test['static_value'])) {
-			Mage::getSingleton('core/session')->addError('Please select the value for ID field');
+			$message = $this -> __('Please select the value for ID field');
+			Mage::getSingleton('core/session') -> addError( $message );
 			$this->_redirect('*/*/pla/website/'.$website.'/store/'.$storeCode);
 			return;
 		}
@@ -129,6 +131,8 @@ class Netreviews_Pla_Adminhtml_NetreviewsplaController extends Mage_Adminhtml_Co
 			$filtered[$index]['attribute_id'] = $attributeModel->getData('attribute_id');
 		}
 		$mageselc->saveConfig('avisverifies/extra/pla_configuration',  json_encode($filtered),'stores',$storeId);
+		$message = $this -> __('Your settings have been submitted successfully.');
+        Mage::getSingleton('core/session') -> addSuccess( $message );
 		$this->_redirect('*/*/pla/website/'.$website.'/store/'.$storeCode);
 		return;
     }

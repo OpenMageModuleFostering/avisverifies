@@ -145,6 +145,8 @@ class Netreviews_Avisverifies_Helper_Install {
         $resource = Mage::getSingleton('core/resource');
         $write = $resource->getConnection('core_write');
         // Install Tables, RUN Query.
+        $write->query("DROP TABLE IF EXISTS `{$resource->getTableName('avisverifies_products_reviews')}`;");
+        $write->query("DROP TABLE IF EXISTS `{$resource->getTableName('avisverifies_products_average')}`;");
         $write->query("
         CREATE TABLE IF NOT EXISTS `{$resource->getTableName('avisverifies_products_reviews')}` (
                           `id_product_av` varchar(36) NOT NULL,
