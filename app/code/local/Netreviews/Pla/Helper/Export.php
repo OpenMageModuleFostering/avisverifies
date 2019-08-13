@@ -395,7 +395,7 @@ class Netreviews_Pla_Helper_Export extends Netreviews_Avisverifies_Helper_Export
 		$parentIds = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild($productId);
 		if (count($parentIds) > 0) {
 			$product = Mage::getModel('catalog/product')->load($parentIds[0]);
-			return $product->getUrlInStore(array('_store' => $order->getStoreId()));
+			return $product->getUrlInStore(array('_store' => $storeId));
 		}
 		else {
 			$parentIds = Mage::getModel('catalog/product_type_grouped')->getParentIdsByChild($productId);
