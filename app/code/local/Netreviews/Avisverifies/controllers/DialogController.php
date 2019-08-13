@@ -486,7 +486,7 @@ class Netreviews_Avisverifies_DialogController extends Mage_Core_Controller_Fron
 				// skip
 				continue;
 			}
-			elseif ($data['query'] == "NEW") {
+			elseif ($data['query'] == "NEW" || $data['query'] == "UPDATE") {
 				// now we check for the parent - child relationship
 				$productListIds = $DATA->parentChildRelationship($data['ref_product']);
 				
