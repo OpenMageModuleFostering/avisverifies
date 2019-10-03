@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/AvisVerifies",
+    "name": "OpenMageModuleFostering\/AvisVerifies",
     "type": "magento-module",
     "license": "OSLv3.0",
     "homepage": "",
     "description": "Avis Verifies vous permet de recolter l'avis des clients sur votre site ecommerce.",
     "authors": [
-    {
-        "name": "Johnny",
-        "email": "johnny@avis-verifies.com"
-    }
-],
+        {
+            "name": "Johnny",
+            "email": "johnny@avis-verifies.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
